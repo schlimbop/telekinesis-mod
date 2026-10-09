@@ -61,6 +61,9 @@ jobs:
           -DVCPKG_TARGET_TRIPLET=x64-windows-static
           -DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreaded
 
+      - name: Check plugin compilation before building the support library
+        run: cmake --build build --config Release --target SkyrimDynasty -- /p:BuildProjectReferences=false /t:ClCompile
+
       - name: Compile Release DLL
         run: cmake --build build --config Release --parallel 4
 
