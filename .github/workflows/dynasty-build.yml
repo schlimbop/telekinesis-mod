@@ -36,7 +36,7 @@ jobs:
           from pathlib import Path, PurePosixPath
           import hashlib, json, zipfile
           archive = Path('SkyrimDynasty_v0.8.0_source.zip')
-          expected = '8dd04da2b18bebce2f312050b332ae71e4f572f90063fbe03a70756b9ad1ffba'
+          expected = '425a8db947c9acc5245dda166e8b56dbae4fc5c9cca9ec9aa4dc4fef472b722a'
           if hashlib.sha256(archive.read_bytes()).hexdigest() != expected:
               raise SystemExit('Source ZIP checksum mismatch; upload the supplied ZIP unchanged.')
           with zipfile.ZipFile(archive) as z:
@@ -86,7 +86,7 @@ jobs:
               if export not in data:
                   raise SystemExit('Missing SKSE export: ' + repr(export))
           info = ('Skyrim Dynasty 0.8.0\n'
-                  'Source ZIP SHA256: 8dd04da2b18bebce2f312050b332ae71e4f572f90063fbe03a70756b9ad1ffba\n'
+                  'Source ZIP SHA256: 425a8db947c9acc5245dda166e8b56dbae4fc5c9cca9ec9aa4dc4fef472b722a\n'
                   'Build commit: ' + os.environ['GITHUB_SHA'] + '\n'
                   'DLL SHA256: ' + hashlib.sha256(data).hexdigest() + '\n'
                   'Native build only; Skyrim gameplay verification remains pending.\n')
