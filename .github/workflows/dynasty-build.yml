@@ -1,10 +1,10 @@
-name: Build Skyrim Dynasty 0.9.5
+name: Build Skyrim Dynasty 0.9.6
 
 on:
   push:
     branches-ignore: [main, master]
     paths:
-      - SkyrimDynasty_v0.9.5_source.zip
+      - SkyrimDynasty_v0.9.6_source.zip
       - .github/workflows/dynasty-build.yml
   workflow_dispatch:
 
@@ -35,8 +35,8 @@ jobs:
         run: |
           from pathlib import Path, PurePosixPath
           import hashlib, json, zipfile
-          archive = Path('SkyrimDynasty_v0.9.5_source.zip')
-          expected = 'dbf8e77f1131cc2ddcc90666368c0fb1aecceb3236a6bbd78d18b13d2c1d3706'
+          archive = Path('SkyrimDynasty_v0.9.6_source.zip')
+          expected = '4cac2836ef04071603f5916a96a31795b4183db518fd33bb1b99ac72935976da'
           if hashlib.sha256(archive.read_bytes()).hexdigest() != expected:
               raise SystemExit('Source ZIP checksum mismatch; upload the supplied ZIP unchanged.')
           with zipfile.ZipFile(archive) as z:
@@ -90,8 +90,8 @@ jobs:
           for export in [b'SKSEPlugin_Load\0', b'SKSEPlugin_Version\0']:
               if export not in data:
                   raise SystemExit('Missing SKSE export: ' + repr(export))
-          info = ('Skyrim Dynasty 0.9.5\n'
-                  'Source ZIP SHA256: dbf8e77f1131cc2ddcc90666368c0fb1aecceb3236a6bbd78d18b13d2c1d3706\n'
+          info = ('Skyrim Dynasty 0.9.6\n'
+                  'Source ZIP SHA256: 4cac2836ef04071603f5916a96a31795b4183db518fd33bb1b99ac72935976da\n'
                   'Build commit: ' + os.environ['GITHUB_SHA'] + '\n'
                   'DLL SHA256: ' + hashlib.sha256(data).hexdigest() + '\n'
                   'Native build only; Skyrim gameplay verification remains pending.\n')
@@ -101,7 +101,7 @@ jobs:
       - name: Downloadable native build
         uses: actions/upload-artifact@v4
         with:
-          name: SkyrimDynasty-0.9.5-native
+          name: SkyrimDynasty-0.9.6-native
           if-no-files-found: error
           path: |
             source/SkyrimDynasty/build/Release/SkyrimDynasty.dll
